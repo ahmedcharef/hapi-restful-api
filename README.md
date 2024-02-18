@@ -44,3 +44,8 @@ GET /notes/{id}: Get a note by ID.
 PUT /notes/{id}: Update a note by ID.
 DELETE /notes/{id}: Delete a note by ID.
 ```
+
+## Project Structure
+As the project expands, it's vital to maintain a modular codebase, separate responsibilities into different layers.
+We need to implement testing and deployment automation with CI/CD to ensure code quality and simplify deployment processes.
+Additionally, incorporating a caching mechanism like Redis server can enhance performance by storing frequently accessed data.
