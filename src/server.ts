@@ -1,20 +1,25 @@
 import Hapi from "@hapi/hapi";
 import { Server } from "@hapi/hapi";
+import dotenv from "dotenv";
+import notesRoutes from "./notesRoutes";
+
 export let server: Server;
 export const init = async (): Promise<Server> => {
-  server = Hapi.server({
-    port: 3000,
-    host: "127.0.0.1",
-  });
+	dotenv.config();
 
-  return server;
+	server = Hapi.server({
+		port: process.env.PORT || 3000,
+		host: process.env.HOST || "127.0.0.1",
+	});
+	server.register([notesRoutes]);
+	return server;
 };
 export const start = async (): Promise<void> => {
-  console.log(`Listening on ${server.settings.host}:${server.settings.port}`);
-  return server.start();
+	console.log(`Listening on ${server.settings.host}:${server.settings.port}`);
+	return server.start();
 };
 process.on("unhandledRejection", (err) => {
-  console.error("unhandledRejection");
-  console.error(err);
-  process.exit(1);
+	console.error("unhandledRejection");
+	console.error(err);
+	process.exit(1);
 });
