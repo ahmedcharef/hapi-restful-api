@@ -14,8 +14,8 @@ class Note implements INote {
 
 	constructor(title: string, body: string) {
 		const schema = Joi.object({
-			title: Joi.string().min(4).required(),
-			body: Joi.string().required(),
+			title: Joi.string().min(4).required().empty(),
+			body: Joi.string().required().empty(),
 		});
 
 		const { error } = schema.validate({ title, body });
