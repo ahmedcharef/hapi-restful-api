@@ -28,14 +28,25 @@ export default class NoteService {
 	}
 
 	updateNote(id: string, title: string, body: string): Note | string {
-		const noteIndex = this.notes.findIndex((note) => note.id === id);
-		if (noteIndex === -1) {
-			return "Note not found";
-		}
+		try {
+			const note = new Note(title, body);
 
-		this.notes[noteIndex].title = title;
-		this.notes[noteIndex].body = body;
-		return this.notes[noteIndex];
+			const noteIndex = this.notes.findIndex((note) => note.id === id);
+			if (noteIndex === -1) {
+				return "Note not found";
+			}
+
+			this.notes[noteIndex] = note;
+
+			return this.notes[noteIndex];
+		} catch (error: any) {
+			if (error.isJoi) {
+				console.error("Validation error", error.details);
+				throw error.details[0].message;
+			}
+			console.error("Unknown error", error);
+			throw error;
+		}
 	}
 
 	deleteNote(id: string): string {
