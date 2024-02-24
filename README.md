@@ -28,6 +28,10 @@ Open the .env file and set PORT and HOST variables to listen on.
 
 4. Running the server:
 
+```bash
+npm run start
+```
+
 ## Model
 
 This application uses a simple Note model for its data. Here is how it is defined:
